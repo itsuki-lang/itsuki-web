@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="itsuki_logo.png" type="image/png" />
+        <title>Itsuki Docs | Inicio</title>
+        <meta
+            name="description"
+            content="Documentacion oficial de Itsuki: sintaxis, builtins, CLI y arquitectura."
+        />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="bg-shape bg-shape-a" aria-hidden="true"></div>
+        <div class="bg-shape bg-shape-b" aria-hidden="true"></div>
+
+        <header class="site-header">
+            <div class="container nav-wrap">
+                <a class="brand" href="index.html">
+                    <img
+                        class="brand-logo"
+                        src="itsuki_logo.png"
+                        alt="Logo de Itsuki"
+                    />
+                    <span class="brand-text">Itsuki Docs</span>
+                </a>
+                <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">
+                    Menu
+                </button>
+                <nav class="top-nav" id="topNav">
+                    <a href="index.html">Inicio</a>
+                    <a href="instalacion-cli.html">Instalacion y CLI</a>
+                    <a href="sintaxis.html">Sintaxis</a>
+                    <a href="builtins.html">Builtins</a>
+                    <a href="bibliotecas.html">Bibliotecas</a>
+                    <a href="arquitectura.html">Arquitectura</a>
+                    <a href="ejemplos.html">Ejemplos</a>
+                    <a href="skills.html">Skills</a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero container reveal">
+                <p class="eyebrow">Lenguaje moderno escrito en C</p>
+                <h1>Documentacion de Itsuki</h1>
+                <p class="lead">
+                    Esta web resume el estado actual de Itsuki v4.6
+                </p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="sintaxis.html"
+                        >Empezar con sintaxis</a
+                    >
+                    <a class="btn btn-ghost" href="builtins.html"
+                        >Ver referencia builtins</a
+                    >
+                </div>
+            </section>
+
+            <section class="container grid cards reveal">
+                <article class="card">
+                    <h2>Base del lenguaje</h2>
+                    <p>
+                        Variables con <code>sea</code>, control de flujo,
+                        funciones, clases, enums, modulos y manejo de errores.
+                    </p>
+                    <a href="sintaxis.html">Ir a sintaxis</a>
+                </article>
+                <article class="card">
+                    <h2>Herramientas CLI</h2>
+                    <p>
+                        REPL, compilacion a C y bytecode, modo LSP, formateador
+                        y linter integrados.
+                    </p>
+                    <a href="instalacion-cli.html">Ir a CLI</a>
+                </article>
+                <article class="card">
+                    <h2>Runtime real</h2>
+                    <p>
+                        Ejecucion por AST/VM, opcodes, GC, sistema de tipos y
+                        soporte de FFI con C.
+                    </p>
+                    <a href="arquitectura.html">Ir a arquitectura</a>
+                </article>
+            </section>
+
+            <section class="container panel reveal">
+                <h2>Quickstart</h2>
+                <div class="code-wrap">
+                    <button class="copy-btn" type="button">Copiar</button>
+                    <pre><code class="language-bash"># compilar
+make
+
+# ejecutar script
+./itsuki hola.suki
+
+# abrir REPL
+./itsuki
+
+# ayuda CLI
+./itsuki --help</code></pre>
+                </div>
+            </section>
+
+            <section class="container reveal">
+                <h2>Mapa de documentacion</h2>
+                <div class="grid cards">
+                    <article class="card">
+                        <h3>Instalacion y CLI</h3>
+                        <p>
+                            Comandos disponibles en <code>main.c</code>, flags y
+                            flujo de compilacion.
+                        </p>
+                        <a href="instalacion-cli.html">Abrir</a>
+                    </article>
+                    <article class="card">
+                        <h3>Builtins</h3>
+                        <p>
+                            Funciones registradas en
+                            <code>src/builtins.c</code> y ejemplos de uso.
+                        </p>
+                        <a href="builtins.html">Abrir</a>
+                    </article>
+                    <article class="card">
+                        <h3>Bibliotecas</h3>
+                        <p>
+                            Documentacion de bibliotecas del ecosistema; por
+                            ahora incluye <code>socket</code>.
+                        </p>
+                        <a href="bibliotecas.html">Abrir</a>
+                    </article>
+                    <article class="card">
+                        <h3>Ejemplos completos</h3>
+                        <p>
+                            Snippets listos para copiar: POO, arrays, modulos,
+                            excepciones y FFI.
+                        </p>
+                        <a href="ejemplos.html">Abrir</a>
+                    </article>
+                    <article class="card">
+                        <h3>Skills y Retos</h3>
+                        <p>
+                            Retos por dificultad para entrenar logica y dominar
+                            Itsuki construyendo soluciones reales.
+                        </p>
+                        <a href="skills.html">Abrir</a>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container"><p>Itsuki Docs</p></div>
+        </footer>
+
+        <script src="script.js"></script>
+    </body>
+</html>

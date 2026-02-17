@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="itsuki_logo.png" type="image/png" />
+        <title>Itsuki Docs | Skills</title>
+        <meta
+            name="description"
+            content="Retos de programacion para mejorar skills con Itsuki."
+        />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="bg-shape bg-shape-a" aria-hidden="true"></div>
+        <header class="site-header">
+            <div class="container nav-wrap">
+                <a class="brand" href="index.html"
+                    ><img
+                        class="brand-logo"
+                        src="itsuki_logo.png"
+                        alt="Logo de Itsuki"
+                    /><span class="brand-text">Itsuki Docs</span></a
+                >
+                <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">
+                    Menu
+                </button>
+                <nav class="top-nav" id="topNav">
+                    <a href="index.html">Inicio</a>
+                    <a href="instalacion-cli.html">Instalacion y CLI</a>
+                    <a href="sintaxis.html">Sintaxis</a>
+                    <a href="builtins.html">Builtins</a>
+                    <a href="bibliotecas.html">Bibliotecas</a>
+                    <a href="arquitectura.html">Arquitectura</a>
+                    <a href="ejemplos.html">Ejemplos</a>
+                    <a href="skills.html">Skills</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container doc reveal">
+            <h1>Skills: Retos para Itsuki</h1>
+            <p>
+                Practica con retos progresivos. El formato de esta pagina es de
+                documentacion, igual que la seccion de sintaxis.
+            </p>
+
+            <h2>Ruta de practica</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nivel</th>
+                        <th>Meta</th>
+                        <th>Tema central</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Facil</td>
+                        <td>Dominar control de flujo y strings</td>
+                        <td>Funciones, split/join, arrays</td>
+                    </tr>
+                    <tr>
+                        <td>Medio</td>
+                        <td>Modelar datos y validar entradas</td>
+                        <td>Mapas, archivos, manejo de errores</td>
+                    </tr>
+                    <tr>
+                        <td>Avanzado</td>
+                        <td>Resolver problemas de red y modularidad</td>
+                        <td>Socket, modulos propios, arquitectura</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Reto 1 (Facil): Contador de palabras</h2>
+            <p>Objetivo: contar cuantas palabras tiene un texto.</p>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>funcion contar_palabras(texto) {
+  # TODO
+}
+
+print(contar_palabras("itsuki es muy rapido"))</code></pre>
+            </div>
+
+            <h2>Reto 2 (Facil): Suma de pares</h2>
+            <p>Objetivo: sumar solo los valores pares de un array.</p>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>funcion suma_pares(arr) {
+  # TODO
+}
+
+print(suma_pares([1,2,3,4,5,6]))</code></pre>
+            </div>
+
+            <h2>Reto 3 (Medio): Frecuencia de caracteres</h2>
+            <p>Objetivo: crear un mapa con conteos por caracter.</p>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>funcion frecuencia(texto) {
+  sea out = {}
+  # TODO
+  retornar out
+}</code></pre>
+            </div>
+
+            <h2>Reto 4 (Medio): Mini validador JSON</h2>
+            <p>
+                Objetivo: leer archivo y validar que no este vacio y que empiece
+                en <code>{</code> o <code>[</code>.
+            </p>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>funcion validar_json(path) {
+  intentar {
+    sea txt = leer_archivo(path)
+    # TODO
+  } capturar(e) {
+    retornar falso
+  }
+}</code></pre>
+            </div>
+
+            <h2>Reto 5 (Avanzado): Echo server TCP</h2>
+            <p>
+                Objetivo: usando <code>modules/socket</code>, recibir texto y
+                devolverlo al cliente.
+            </p>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>importar "modules/socket" como net
+
+sea s = net.socket(net.AF_INET, net.SOCK_STREAM)
+net.bind(s, "0.0.0.0", 9000)
+net.listen(s, 5)
+
+# TODO: aceptar y reenviar mensajes</code></pre>
+            </div>
+
+            <h2>Reto 6 (Avanzado): Crea tu modulo utilidades</h2>
+            <p>
+                Objetivo: crear <code>modules/utils.suki</code> y exportar tres
+                funciones reutilizables.
+            </p>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code># modules/utils.suki
+exportar funcion slug(txt) { # TODO }
+exportar funcion clamp(n, min, max) { # TODO }
+exportar funcion titulo(txt) { # TODO }</code></pre>
+            </div>
+
+            <h2>Reto 7 (Medio): Top 3 numeros mayores</h2>
+            <p>
+                Objetivo: recibir un array y devolver otro con los 3 numeros mas
+                altos, ordenados de mayor a menor.
+            </p>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>funcion top3(arr) {
+  # TODO
+}
+
+print(top3([9,1,7,2,10,4,8]))</code></pre>
+            </div>
+
+            <h2>Reto 8 (Medio): Agrupar por primera letra</h2>
+            <p>Objetivo: agrupar palabras en un mapa por su primera letra.</p>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>funcion agrupar_por_inicial(lista) {
+  sea grupos = {}
+  # TODO
+  retornar grupos
+}</code></pre>
+            </div>
+
+            <h2>Reto 9 (Medio): Cache simple en archivo</h2>
+            <p>
+                Objetivo: guardar y recuperar una respuesta en un archivo para
+                evitar calculos repetidos.
+            </p>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>funcion cache_get_set(path, valor_por_defecto) {
+  # TODO: si existe, leer; si no existe, escribir default
+}</code></pre>
+            </div>
+
+            <h2>Reto 10 (Avanzado): Cliente HTTP mini</h2>
+            <p>
+                Objetivo: hacer una peticion GET y devolver solo el cuerpo de la
+                respuesta.
+            </p>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>importar "modules/socket" como net
+
+funcion http_get(host, path) {
+  # TODO
+}</code></pre>
+            </div>
+
+            <h2>Reto 11 (Avanzado): Logger modular</h2>
+            <p>
+                Objetivo: crear un modulo <code>modules/logger.suki</code> con
+                niveles <code>info</code>, <code>warn</code> y
+                <code>error</code>.
+            </p>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code># modules/logger.suki
+exportar funcion info(msg) { # TODO }
+exportar funcion warn(msg) { # TODO }
+exportar funcion error(msg) { # TODO }</code></pre>
+            </div>
+
+            <h2>Reto 12 (Avanzado): Mini parser de comandos</h2>
+            <p>
+                Objetivo: leer <code>cli_args()</code> y parsear flags como
+                <code>--debug</code>, <code>--port=8080</code>.
+            </p>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>funcion parse_args() {
+  sea out = {}
+  sea args = cli_args()
+  # TODO
+  retornar out
+}</code></pre>
+            </div>
+
+            <h2>Siguiente paso recomendado</h2>
+            <p>
+                Cuando completes un reto, conviertelo en modulo y documentalo en
+                <code>modules/</code> para reutilizarlo en otros proyectos.
+            </p>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container"><p>Itsuki Docs</p></div>
+        </footer>
+        <script src="script.js"></script>
+    </body>
+</html>

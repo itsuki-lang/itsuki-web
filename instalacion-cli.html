@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="itsuki_logo.png" type="image/png" />
+        <title>Itsuki Docs | Instalacion y CLI</title>
+        <meta
+            name="description"
+            content="Instalacion de Itsuki y referencia de comandos CLI."
+        />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="bg-shape bg-shape-a" aria-hidden="true"></div>
+        <header class="site-header">
+            <div class="container nav-wrap">
+                <a class="brand" href="index.html"
+                    ><img
+                        class="brand-logo"
+                        src="itsuki_logo.png"
+                        alt="Logo de Itsuki"
+                    /><span class="brand-text">Itsuki Docs</span></a
+                >
+                <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">
+                    Menu
+                </button>
+                <nav class="top-nav" id="topNav">
+                    <a href="index.html">Inicio</a>
+                    <a href="instalacion-cli.html">Instalacion y CLI</a>
+                    <a href="sintaxis.html">Sintaxis</a>
+                    <a href="builtins.html">Builtins</a>
+                    <a href="bibliotecas.html">Bibliotecas</a>
+                    <a href="arquitectura.html">Arquitectura</a>
+                    <a href="ejemplos.html">Ejemplos</a>
+                    <a href="skills.html">Skills</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container doc reveal">
+            <h1>Instalacion y CLI</h1>
+            <p>Podras ver como instalar itsuki</p>
+
+            <h2>Instalacion rapida</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code class="language-bash">git clone github.com/Apolo1061/itsuki.git
+cd itsuki
+make</code></pre>
+            </div>
+
+            <h2>Comandos principales</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Comando</th>
+                        <th>Descripcion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>itsuki archivo.suki</code></td>
+                        <td>Ejecuta un script.</td>
+                    </tr>
+                    <tr>
+                        <td><code>itsuki</code></td>
+                        <td>Abre REPL interactivo.</td>
+                    </tr>
+                    <tr>
+                        <td><code>itsuki --help</code></td>
+                        <td>Muestra ayuda CLI.</td>
+                    </tr>
+                    <tr>
+                        <td><code>itsuki --lsp</code></td>
+                        <td>Inicia el servidor LSP.</td>
+                    </tr>
+                    <tr>
+                        <td><code>itsuki fmt archivo.suki</code></td>
+                        <td>Formatea codigo.</td>
+                    </tr>
+                    <tr>
+                        <td><code>itsuki lint archivo.suki</code></td>
+                        <td>Linter del archivo.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Compilacion y salida</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Modo</th>
+                        <th>Ejemplo</th>
+                        <th>Resultado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nativo</td>
+                        <td><code>itsuki app.suki -o app</code></td>
+                        <td>Genera binario compilando bundle C.</td>
+                    </tr>
+                    <tr>
+                        <td>Codigo C</td>
+                        <td><code>itsuki app.suki -c app.c</code></td>
+                        <td>Exporta C embebido.</td>
+                    </tr>
+                    <tr>
+                        <td>Bytecode</td>
+                        <td><code>itsuki app.suki -b app.sukiby</code></td>
+                        <td>Genera bytecode.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Flags utiles</h2>
+            <ul>
+                <li>
+                    <code>--debug</code>: activa debug y step mode de la VM.
+                </li>
+                <li>
+                    <code>--profile</code>: imprime perfil de tiempo por
+                    funcion.
+                </li>
+                <li><code>--no-gc</code>: activa modo manual de memoria.</li>
+                <li><code>--lint</code>: lint antes de ejecutar.</li>
+                <li>
+                    <code>--static</code>, <code>--strip</code>,
+                    <code>--keep-temp</code>: opciones de build nativo.
+                </li>
+            </ul>
+
+            <h2>REPL</h2>
+            <p>Comandos internos del REPL:</p>
+            <ul>
+                <li><code>:ayuda</code></li>
+                <li><code>:limpiar</code> o <code>:cls</code></li>
+                <li><code>:salir</code> o <code>:exit</code></li>
+            </ul>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container"><p>Itsuki Docs</p></div>
+        </footer>
+        <script src="script.js"></script>
+    </body>
+</html>

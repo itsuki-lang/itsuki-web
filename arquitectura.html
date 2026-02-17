@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="itsuki_logo.png" type="image/png" />
+        <title>Itsuki Docs | Arquitectura</title>
+        <meta name="description" content="Arquitectura interna de Itsuki." />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="bg-shape bg-shape-b" aria-hidden="true"></div>
+        <header class="site-header">
+            <div class="container nav-wrap">
+                <a class="brand" href="index.html"
+                    ><img
+                        class="brand-logo"
+                        src="itsuki_logo.png"
+                        alt="Logo de Itsuki"
+                    /><span class="brand-text">Itsuki Docs</span></a
+                >
+                <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">
+                    Menu
+                </button>
+                <nav class="top-nav" id="topNav">
+                    <a href="index.html">Inicio</a>
+                    <a href="instalacion-cli.html">Instalacion y CLI</a>
+                    <a href="sintaxis.html">Sintaxis</a>
+                    <a href="builtins.html">Builtins</a>
+                    <a href="bibliotecas.html">Bibliotecas</a>
+                    <a href="arquitectura.html">Arquitectura</a>
+                    <a href="ejemplos.html">Ejemplos</a>
+                    <a href="skills.html">Skills</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container doc reveal">
+            <h1>Arquitectura interna</h1>
+            <p>Resumen de los componentes de la src actual de Itsuki</p>
+
+            <h2>Pipeline</h2>
+            <ol>
+                <li>
+                    <strong>Lexer</strong> en <code>lexer.c</code>: tokeniza
+                    (keywords, operadores, macros).
+                </li>
+                <li>
+                    <strong>Parser</strong> en <code>parser.c</code>: crea nodos
+                    AST (<code>NodoAST</code>).
+                </li>
+                <li>
+                    <strong>Evaluador/Compiler</strong>: puede evaluar AST y
+                    tambien compilar a bytecode.
+                </li>
+                <li>
+                    <strong>VM</strong> en <code>vm.c</code>: ejecuta opcodes
+                    sobre stack y closures.
+                </li>
+            </ol>
+
+            <h2>AST y tipos</h2>
+            <ul>
+                <li>
+                    Tipos AST: <code>AST_FUNCION</code>, <code>AST_CLASE</code>,
+                    <code>AST_ENUM</code>, <code>AST_TRY_CATCH</code>,
+                    <code>AST_IMPORTAR</code>, <code>AST_C_EXTERN</code>, etc.
+                </li>
+                <li>
+                    Tokens clave: <code>TOKEN_SEA</code>,
+                    <code>TOKEN_FUNCION</code>, <code>TOKEN_CLASE</code>,
+                    <code>TOKEN_ENUM</code>, <code>TOKEN_INTENTAR</code>,
+                    <code>TOKEN_LANZAR</code>.
+                </li>
+                <li>
+                    Sistema de tipos con <code>TipoDato</code> y
+                    <code>TipoExacto</code>.
+                </li>
+            </ul>
+
+            <h2>VM y bytecode</h2>
+            <p>
+                La VM define opcodes como <code>OP_CONSTANTE</code>,
+                <code>OP_LLAMAR</code>, <code>OP_RETORNAR</code>,
+                <code>OP_TRY_BEGIN</code>, <code>OP_LANZAR</code>,
+                <code>OP_IMPORTAR</code>.
+            </p>
+            <p>
+                La estructura <code>Chunk</code> guarda codigo y constantes para
+                ejecutar o serializar en <code>.sukiby</code>.
+            </p>
+
+            <h2>Memoria y GC</h2>
+            <ul>
+                <li>
+                    Gestion de objetos con <code>gc_alloc</code>,
+                    <code>gc_marcar</code> y <code>gc_recolectar</code>.
+                </li>
+                <li>
+                    Modo manual opcional desde CLI con <code>--no-gc</code>.
+                </li>
+                <li>
+                    Builtin <code>liberar()</code> disponible para liberar
+                    explicitamente.
+                </li>
+            </ul>
+
+            <h2>FFI y modulos</h2>
+            <ul>
+                <li>
+                    Interop C con <code>c_incluir</code> y
+                    <code>c_extern</code>.
+                </li>
+                <li>
+                    Bundling y glue code para externos durante <code>-o</code> y
+                    <code>-c</code>.
+                </li>
+                <li>
+                    Sistema de modulos basado en imports y carpeta
+                    <code>modules/</code>.
+                </li>
+            </ul>
+
+            <h2>Tooling adicional</h2>
+            <ul>
+                <li><code>lsp.c</code>: servidor de lenguaje.</li>
+                <li>
+                    <code>formatter.c</code>: comando <code>itsuki fmt</code>.
+                </li>
+                <li>
+                    <code>linter.c</code>: comando <code>itsuki lint</code>.
+                </li>
+                <li>
+                    <code>tools/</code>: gestor de paquetes
+                    <code>itsuki-cy</code>.
+                </li>
+            </ul>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container"><p>Itsuki Docs</p></div>
+        </footer>
+        <script src="script.js"></script>
+    </body>
+</html>

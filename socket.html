@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="itsuki_logo.png" type="image/png" />
+        <title>Itsuki Docs | Biblioteca socket</title>
+        <meta
+            name="description"
+            content="Documentacion del modulo socket de Itsuki."
+        />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="bg-shape bg-shape-b" aria-hidden="true"></div>
+        <header class="site-header">
+            <div class="container nav-wrap">
+                <a class="brand" href="index.html"
+                    ><img
+                        class="brand-logo"
+                        src="itsuki_logo.png"
+                        alt="Logo de Itsuki"
+                    /><span class="brand-text">Itsuki Docs</span></a
+                >
+                <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">
+                    Menu
+                </button>
+                <nav class="top-nav" id="topNav">
+                    <a href="index.html">Inicio</a>
+                    <a href="instalacion-cli.html">Instalacion y CLI</a>
+                    <a href="sintaxis.html">Sintaxis</a>
+                    <a href="builtins.html">Builtins</a>
+                    <a href="bibliotecas.html">Bibliotecas</a>
+                    <a href="arquitectura.html">Arquitectura</a>
+                    <a href="ejemplos.html">Ejemplos</a>
+                    <a href="skills.html">Skills</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container doc reveal">
+            <h1>Biblioteca socket</h1>
+            <p>
+                Esta biblioteca se usa como modulo Itsuki y esta implementada en
+                <code>modules/socket.suki</code>. El modulo envuelve funciones
+                internas del runtime.
+            </p>
+
+            <h2>Importacion correcta</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>importar "modules/socket" como net</code></pre>
+            </div>
+
+            <h2>Constantes exportadas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Constante</th>
+                        <th>Valor</th>
+                        <th>Uso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>net.AF_INET</code></td>
+                        <td><code>2</code></td>
+                        <td>Familia IPv4.</td>
+                    </tr>
+                    <tr>
+                        <td><code>net.SOCK_STREAM</code></td>
+                        <td><code>1</code></td>
+                        <td>Socket TCP.</td>
+                    </tr>
+                    <tr>
+                        <td><code>net.SOCK_DGRAM</code></td>
+                        <td><code>2</code></td>
+                        <td>Socket UDP.</td>
+                    </tr>
+                    <tr>
+                        <td><code>net.SOCK_RAW</code></td>
+                        <td><code>3</code></td>
+                        <td>Socket RAW.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Funciones del modulo</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Funcion</th>
+                        <th>Firma</th>
+                        <th>Descripcion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>net.socket</code></td>
+                        <td><code>(familia, tipo)</code></td>
+                        <td>Crea socket. Si pasas nulo, usa AF_INET + SOCK_STREAM.</td>
+                    </tr>
+                    <tr>
+                        <td><code>net.bind</code></td>
+                        <td><code>(sock, host, port)</code></td>
+                        <td>Asocia socket local a host/puerto.</td>
+                    </tr>
+                    <tr>
+                        <td><code>net.listen</code></td>
+                        <td><code>(sock, backlog)</code></td>
+                        <td>Activa escucha TCP. Si backlog es nulo, usa 5.</td>
+                    </tr>
+                    <tr>
+                        <td><code>net.accept</code></td>
+                        <td><code>(sock)</code></td>
+                        <td>Acepta cliente y retorna <code>[socketCliente, ip]</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><code>net.connect</code></td>
+                        <td><code>(sock, host, port)</code></td>
+                        <td>Conecta cliente TCP.</td>
+                    </tr>
+                    <tr>
+                        <td><code>net.send</code></td>
+                        <td><code>(sock, data)</code></td>
+                        <td>Envia texto por socket.</td>
+                    </tr>
+                    <tr>
+                        <td><code>net.recv</code></td>
+                        <td><code>(sock, buflen)</code></td>
+                        <td>Recibe texto. Si buflen es nulo, usa 4096.</td>
+                    </tr>
+                    <tr>
+                        <td><code>net.sendto</code></td>
+                        <td><code>(sock, data, host, port)</code></td>
+                        <td>Envio UDP.</td>
+                    </tr>
+                    <tr>
+                        <td><code>net.recvfrom</code></td>
+                        <td><code>(sock, buflen)</code></td>
+                        <td>Recepcion UDP, retorna <code>[mensaje, ip]</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><code>net.close</code></td>
+                        <td><code>(sock)</code></td>
+                        <td>Cierra el socket.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Alias disponibles</h2>
+            <p>
+                El modulo tambien exporta alias:
+                <code>leer</code>, <code>escribir</code>, <code>cerrar</code>,
+                <code>conectar</code>, <code>unir</code>, <code>escuchar</code>,
+                <code>aceptar</code>.
+            </p>
+
+            <h2>RAW: estado real</h2>
+            <p>
+                Si, Itsuki expone RAW por <code>net.SOCK_RAW</code> y lo pasa a
+                <code>socket(AF_INET, SOCK_RAW, 0)</code> en C.
+            </p>
+            <ul>
+                <li>En muchos sistemas RAW requiere permisos admin/root.</li>
+                <li>Sin permisos, el runtime lanza error <code>Fallo socket</code>.</li>
+                <li>
+                    La API actual no expone opciones avanzadas de RAW
+                    (setsockopt/protocolo especifico/cabeceras custom).
+                </li>
+            </ul>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>importar "modules/socket" como net
+
+sea r = net.socket(net.AF_INET, net.SOCK_RAW)
+net.close(r)</code></pre>
+            </div>
+
+            <h2>Ejemplo TCP cliente (validado con tests)</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>importar "modules/socket" como net
+
+sea s = net.socket(net.AF_INET, net.SOCK_STREAM)
+net.connect(s, "example.com", 80)
+
+sea req = "GET / HTTP/1.1\r\nHost: example.com\r\nConnection: close\r\n\r\n"
+net.send(s, req)
+
+sea respuesta = net.recv(s, 1024)
+print(subcadena(respuesta, 0, 120))
+net.close(s)</code></pre>
+            </div>
+
+            <h2>Ejemplo UDP local (validado con tests)</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>importar "modules/socket" como net
+
+sea s = net.socket(net.AF_INET, net.SOCK_DGRAM)
+net.bind(s, "127.0.0.1", 9999)
+net.sendto(s, "Hola UDP", "127.0.0.1", 9999)
+
+sea res = net.recvfrom(s, 1024)
+sea datos = res[0]
+sea addr = res[1]
+print("Recibido: " + datos + " de " + addr)
+
+net.close(s)</code></pre>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container"><p>Itsuki Docs</p></div>
+        </footer>
+        <script src="script.js"></script>
+    </body>
+</html>
+

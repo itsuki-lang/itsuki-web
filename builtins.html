@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="itsuki_logo.png" type="image/png" />
+        <title>Itsuki Docs | Builtins</title>
+        <meta
+            name="description"
+            content="Referencia de funciones integradas de Itsuki."
+        />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="bg-shape bg-shape-a" aria-hidden="true"></div>
+        <header class="site-header">
+            <div class="container nav-wrap">
+                <a class="brand" href="index.html"
+                    ><img
+                        class="brand-logo"
+                        src="itsuki_logo.png"
+                        alt="Logo de Itsuki"
+                    /><span class="brand-text">Itsuki Docs</span></a
+                >
+                <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">
+                    Menu
+                </button>
+                <nav class="top-nav" id="topNav">
+                    <a href="index.html">Inicio</a>
+                    <a href="instalacion-cli.html">Instalacion y CLI</a>
+                    <a href="sintaxis.html">Sintaxis</a>
+                    <a href="builtins.html">Builtins</a>
+                    <a href="bibliotecas.html">Bibliotecas</a>
+                    <a href="arquitectura.html">Arquitectura</a>
+                    <a href="ejemplos.html">Ejemplos</a>
+                    <a href="skills.html">Skills</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container doc reveal">
+            <h1>Referencia de Builtins</h1>
+            <p>
+                Listado basado en <code>registrar_builtins()</code> y
+                <code>ejecutar_builtin()</code> de <code>src/builtins.c</code>.
+            </p>
+
+            <label for="builtinSearch"><strong>Buscar funcion</strong></label>
+            <input
+                id="builtinSearch"
+                class="search"
+                type="search"
+                placeholder="Ej: leer_archivo, mapear, tipo_de"
+            />
+
+            <table id="builtinsTable">
+                <thead>
+                    <tr>
+                        <th>Funcion</th>
+                        <th>Categoria</th>
+                        <th>Uso comun</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>tipo_de</code></td>
+                        <td>Tipos</td>
+                        <td>Inspeccion de tipo</td>
+                    </tr>
+                    <tr>
+                        <td><code>string</code></td>
+                        <td>Conversion</td>
+                        <td>Valor a texto</td>
+                    </tr>
+                    <tr>
+                        <td><code>int</code></td>
+                        <td>Conversion</td>
+                        <td>Valor a entero</td>
+                    </tr>
+                    <tr>
+                        <td><code>decimal</code></td>
+                        <td>Conversion</td>
+                        <td>Valor a flotante</td>
+                    </tr>
+                    <tr>
+                        <td><code>booleano</code> / <code>bool</code></td>
+                        <td>Conversion</td>
+                        <td>Valor a booleano</td>
+                    </tr>
+                    <tr>
+                        <td><code>input</code></td>
+                        <td>I/O</td>
+                        <td>Leer stdin</td>
+                    </tr>
+                    <tr>
+                        <td><code>largo</code></td>
+                        <td>Colecciones</td>
+                        <td>Longitud de string/array</td>
+                    </tr>
+                    <tr>
+                        <td><code>mayusculas</code></td>
+                        <td>Cadenas</td>
+                        <td>Uppercase</td>
+                    </tr>
+                    <tr>
+                        <td><code>minusculas</code></td>
+                        <td>Cadenas</td>
+                        <td>Lowercase</td>
+                    </tr>
+                    <tr>
+                        <td><code>subcadena</code></td>
+                        <td>Cadenas</td>
+                        <td>Slice</td>
+                    </tr>
+                    <tr>
+                        <td><code>split</code></td>
+                        <td>Cadenas</td>
+                        <td>Separar por delimitador</td>
+                    </tr>
+                    <tr>
+                        <td><code>join</code></td>
+                        <td>Cadenas</td>
+                        <td>Unir array a string</td>
+                    </tr>
+                    <tr>
+                        <td><code>replace</code></td>
+                        <td>Cadenas</td>
+                        <td>Reemplazo de texto</td>
+                    </tr>
+                    <tr>
+                        <td><code>contiene</code></td>
+                        <td>Cadenas</td>
+                        <td>Contains</td>
+                    </tr>
+                    <tr>
+                        <td><code>empieza_con</code></td>
+                        <td>Cadenas</td>
+                        <td>Prefijo</td>
+                    </tr>
+                    <tr>
+                        <td><code>termina_con</code></td>
+                        <td>Cadenas</td>
+                        <td>Sufijo</td>
+                    </tr>
+                    <tr>
+                        <td><code>repetir</code></td>
+                        <td>Cadenas</td>
+                        <td>Repetir N veces</td>
+                    </tr>
+                    <tr>
+                        <td><code>agregar</code></td>
+                        <td>Arrays</td>
+                        <td>Append</td>
+                    </tr>
+                    <tr>
+                        <td><code>quitar</code></td>
+                        <td>Arrays</td>
+                        <td>Eliminar por indice</td>
+                    </tr>
+                    <tr>
+                        <td><code>reverso</code></td>
+                        <td>Arrays</td>
+                        <td>Invertir array</td>
+                    </tr>
+                    <tr>
+                        <td><code>ordenar</code></td>
+                        <td>Arrays</td>
+                        <td>Orden numerico</td>
+                    </tr>
+                    <tr>
+                        <td><code>array</code></td>
+                        <td>Estructuras</td>
+                        <td>Crear array vacio</td>
+                    </tr>
+                    <tr>
+                        <td><code>mapa</code></td>
+                        <td>Estructuras</td>
+                        <td>Crear mapa vacio</td>
+                    </tr>
+                    <tr>
+                        <td><code>abs</code></td>
+                        <td>Math</td>
+                        <td>Valor absoluto</td>
+                    </tr>
+                    <tr>
+                        <td><code>potencia</code></td>
+                        <td>Math</td>
+                        <td>Exponenciacion</td>
+                    </tr>
+                    <tr>
+                        <td><code>min</code> / <code>max</code></td>
+                        <td>Math</td>
+                        <td>Minimo y maximo</td>
+                    </tr>
+                    <tr>
+                        <td><code>redondear</code></td>
+                        <td>Math</td>
+                        <td>Round</td>
+                    </tr>
+                    <tr>
+                        <td><code>piso</code></td>
+                        <td>Math</td>
+                        <td>Floor</td>
+                    </tr>
+                    <tr>
+                        <td><code>techo</code></td>
+                        <td>Math</td>
+                        <td>Ceil</td>
+                    </tr>
+                    <tr>
+                        <td><code>aleatorio</code></td>
+                        <td>Math</td>
+                        <td>0..1</td>
+                    </tr>
+                    <tr>
+                        <td><code>aleatorio_rango</code></td>
+                        <td>Math</td>
+                        <td>Random min..max</td>
+                    </tr>
+                    <tr>
+                        <td><code>es_numero</code></td>
+                        <td>Tipos</td>
+                        <td>Type check</td>
+                    </tr>
+                    <tr>
+                        <td><code>es_cadena</code></td>
+                        <td>Tipos</td>
+                        <td>Type check</td>
+                    </tr>
+                    <tr>
+                        <td><code>es_array</code></td>
+                        <td>Tipos</td>
+                        <td>Type check</td>
+                    </tr>
+                    <tr>
+                        <td><code>filtrar</code></td>
+                        <td>Alto orden</td>
+                        <td>Filter callback</td>
+                    </tr>
+                    <tr>
+                        <td><code>mapear</code></td>
+                        <td>Alto orden</td>
+                        <td>Map callback</td>
+                    </tr>
+                    <tr>
+                        <td><code>cada</code></td>
+                        <td>Alto orden</td>
+                        <td>ForEach callback</td>
+                    </tr>
+                    <tr>
+                        <td><code>reducir</code></td>
+                        <td>Alto orden</td>
+                        <td>Reduce callback</td>
+                    </tr>
+                    <tr>
+                        <td><code>leer_archivo</code></td>
+                        <td>Archivos</td>
+                        <td>Leer archivo</td>
+                    </tr>
+                    <tr>
+                        <td><code>escribir_archivo</code></td>
+                        <td>Archivos</td>
+                        <td>Escribir archivo</td>
+                    </tr>
+                    <tr>
+                        <td><code>existe_archivo</code></td>
+                        <td>Archivos</td>
+                        <td>Comprobar existencia</td>
+                    </tr>
+                    <tr>
+                        <td><code>dormir</code></td>
+                        <td>Sistema</td>
+                        <td>Sleep en segundos</td>
+                    </tr>
+                    <tr>
+                        <td><code>salir</code></td>
+                        <td>Sistema</td>
+                        <td>Finalizar proceso</td>
+                    </tr>
+                    <tr>
+                        <td><code>system</code></td>
+                        <td>Sistema</td>
+                        <td>Ejecutar comando shell</td>
+                    </tr>
+                    <tr>
+                        <td><code>cli_args</code></td>
+                        <td>Sistema</td>
+                        <td>Argumentos CLI</td>
+                    </tr>
+                    <tr>
+                        <td><code>platform</code></td>
+                        <td>Sistema</td>
+                        <td>SO actual</td>
+                    </tr>
+                    <tr>
+                        <td><code>conseguir_mem</code></td>
+                        <td>Memoria</td>
+                        <td>Reservar buffer</td>
+                    </tr>
+                    <tr>
+                        <td><code>liberar</code></td>
+                        <td>Memoria</td>
+                        <td>Liberar objeto</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Nota sobre sockets nativos</h2>
+            <p>
+                Existen funciones internas con prefijo <code>_socket_*</code>,
+                pero para uso normal conviene importar el módulo
+                <code>"modules/socket"</code> y usar <code>net.socket</code>,
+                <code>net.connect</code>, <code>net.send</code>, etc.
+            </p>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container"><p>Itsuki Docs</p></div>
+        </footer>
+        <script src="script.js"></script>
+    </body>
+</html>
+

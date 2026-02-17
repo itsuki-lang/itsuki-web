@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="itsuki_logo.png" type="image/png" />
+        <title>Itsuki Docs | Crear tu modulo</title>
+        <meta
+            name="description"
+            content="Guia para crear tu propio modulo en Itsuki."
+        />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="bg-shape bg-shape-a" aria-hidden="true"></div>
+        <header class="site-header">
+            <div class="container nav-wrap">
+                <a class="brand" href="index.html"
+                    ><img
+                        class="brand-logo"
+                        src="itsuki_logo.png"
+                        alt="Logo de Itsuki"
+                    /><span class="brand-text">Itsuki Docs</span></a
+                >
+                <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">
+                    Menu
+                </button>
+                <nav class="top-nav" id="topNav">
+                    <a href="index.html">Inicio</a>
+                    <a href="instalacion-cli.html">Instalacion y CLI</a>
+                    <a href="sintaxis.html">Sintaxis</a>
+                    <a href="builtins.html">Builtins</a>
+                    <a href="bibliotecas.html">Bibliotecas</a>
+                    <a href="arquitectura.html">Arquitectura</a>
+                    <a href="ejemplos.html">Ejemplos</a>
+                    <a href="skills.html">Skills</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container doc reveal">
+            <h1>Como crear tu propio modulo</h1>
+            <p>
+                En Itsuki, un modulo es un archivo en <code>modules/</code> que
+                exporta funciones, clases o constantes con la palabra
+                <code>exportar</code>.
+            </p>
+
+            <h2>1) Crea el archivo del modulo</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code># modules/mate.suki
+exportar sea PI = 3.14159
+
+exportar funcion sumar(a, b) {
+  retornar a + b
+}
+
+sea secreto = 123  # no exportado</code></pre>
+            </div>
+
+            <h2>2) Importalo desde tu app</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>importar "modules/mate" como mate
+
+print(mate.PI)
+print(mate.sumar(10, 20))</code></pre>
+            </div>
+
+            <h2>3) Recomendaciones</h2>
+            <ul>
+                <li>Exporta solo API publica; deja lo interno sin <code>exportar</code>.</li>
+                <li>Usa nombres claros para funciones y constantes.</li>
+                <li>Evita ejecutar logica pesada al cargar el modulo.</li>
+                <li>Si el modulo crece, usa un <code>init.suki</code> para reexportar.</li>
+            </ul>
+
+            <h2>Estructura sugerida</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>modules/
+  mi_lib/
+    init.suki
+    strings.suki
+    numeros.suki</code></pre>
+            </div>
+
+            <h2>Bonus: modulo nativo C</h2>
+            <p>
+                Si necesitas rendimiento bajo nivel, crea funciones en C y
+                registralas en <code>src/builtins.c</code> para exponerlas al
+                lenguaje.
+            </p>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container"><p>Itsuki Docs</p></div>
+        </footer>
+        <script src="script.js"></script>
+    </body>
+</html>
+

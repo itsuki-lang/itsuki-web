@@ -42,8 +42,8 @@
         <main class="container doc reveal">
             <h1>Biblioteca time</h1>
             <p>
-                Modulo de tiempo implementado en <code>modules/time.suki</code>.
-                Expone wrappers sobre funciones internas del runtime.
+                Modulo de tiempo nativo implementado en
+                <code>modules/time.c</code>.
             </p>
 
             <h2>Importacion</h2>
@@ -73,6 +73,11 @@
                         <td>Timestamp actual en segundos.</td>
                     </tr>
                     <tr>
+                        <td><code>t.time</code></td>
+                        <td><code>()</code></td>
+                        <td>Alias de <code>now_s()</code>.</td>
+                    </tr>
+                    <tr>
                         <td><code>t.monotonic_ms</code></td>
                         <td><code>()</code></td>
                         <td>Reloj monotonic en milisegundos.</td>
@@ -81,6 +86,21 @@
                         <td><code>t.monotonic_s</code></td>
                         <td><code>()</code></td>
                         <td>Reloj monotonic en segundos.</td>
+                    </tr>
+                    <tr>
+                        <td><code>t.perf_counter_ms</code></td>
+                        <td><code>()</code></td>
+                        <td>Contador de alta resolucion en milisegundos.</td>
+                    </tr>
+                    <tr>
+                        <td><code>t.perf_counter_s</code></td>
+                        <td><code>()</code></td>
+                        <td>Contador de alta resolucion en segundos.</td>
+                    </tr>
+                    <tr>
+                        <td><code>t.process_time_s</code></td>
+                        <td><code>()</code></td>
+                        <td>Tiempo de CPU consumido por el proceso.</td>
                     </tr>
                     <tr>
                         <td><code>t.sleep_ms</code></td>
@@ -94,21 +114,90 @@
                     </tr>
                     <tr>
                         <td><code>t.format_utc_ms</code></td>
-                        <td><code>(epoch_ms, fmt)</code></td>
+                        <td><code>(epoch_ms, [fmt])</code></td>
                         <td>Formatea fecha en UTC.</td>
                     </tr>
                     <tr>
                         <td><code>t.format_local_ms</code></td>
-                        <td><code>(epoch_ms, fmt)</code></td>
+                        <td><code>(epoch_ms, [fmt])</code></td>
                         <td>Formatea fecha en hora local.</td>
+                    </tr>
+                    <tr>
+                        <td><code>t.strftime</code></td>
+                        <td><code>(fmt, [epoch_ms], [utc])</code></td>
+                        <td>Formateo generico de fecha/hora.</td>
                     </tr>
                     <tr>
                         <td><code>t.iso8601_utc_now</code></td>
                         <td><code>()</code></td>
                         <td>Fecha actual UTC en formato ISO8601.</td>
                     </tr>
+                    <tr>
+                        <td><code>t.localtime_ms</code></td>
+                        <td><code>([epoch_ms])</code></td>
+                        <td>Retorna mapa con componentes de hora local.</td>
+                    </tr>
+                    <tr>
+                        <td><code>t.gmtime_ms</code></td>
+                        <td><code>([epoch_ms])</code></td>
+                        <td>Retorna mapa con componentes UTC.</td>
+                    </tr>
+                    <tr>
+                        <td><code>t.mktime_local</code></td>
+                        <td>
+                            <code
+                                >(year, month, day, [hour], [minute],
+                                [second])</code
+                            >
+                        </td>
+                        <td>Convierte fecha local a epoch en milisegundos.</td>
+                    </tr>
+                    <tr>
+                        <td><code>t.mktime_utc</code></td>
+                        <td>
+                            <code
+                                >(year, month, day, [hour], [minute],
+                                [second])</code
+                            >
+                        </td>
+                        <td>Convierte fecha UTC a epoch en milisegundos.</td>
+                    </tr>
+                    <tr>
+                        <td><code>t.tz_offset_minutes</code></td>
+                        <td><code>([epoch_ms])</code></td>
+                        <td>Offset local respecto de UTC en minutos.</td>
+                    </tr>
                 </tbody>
             </table>
+
+            <h2>Constantes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Constante</th>
+                        <th>Descripcion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>t.MS_PER_SECOND</code></td>
+                        <td>1000.</td>
+                    </tr>
+                    <tr>
+                        <td><code>t.SECONDS_PER_DAY</code></td>
+                        <td>86400.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Estructura de localtime/gmtime</h2>
+            <p>
+                <code>localtime_ms()</code> y <code>gmtime_ms()</code> retornan
+                un mapa con: <code>year</code>, <code>month</code>,
+                <code>day</code>, <code>hour</code>, <code>minute</code>,
+                <code>second</code>, <code>wday</code> (0=domingo),
+                <code>yday</code> (1-366) e <code>isdst</code>.
+            </p>
 
             <h2>Ejemplo</h2>
             <div class="code-wrap">
@@ -116,12 +205,17 @@
                 <pre><code>importar "modules/time" como t
 
 print("utc epoch 0: " + t.format_utc_ms(0, "%Y-%m-%d"))
-print("now: " + string(t.now_ms()))
+print("now_s: " + string(t.time()))
+print("strftime utc: " + t.strftime("%Y-%m-%d %H:%M:%S", 0, 1))
+print("tz offset min: " + string(t.tz_offset_minutes()))
 
 sea m1 = t.monotonic_ms()
 t.sleep_ms(20)
 sea m2 = t.monotonic_ms()
-print("delta monotonic: " + string(m2 - m1) + " ms")</code></pre>
+print("delta monotonic: " + string(m2 - m1) + " ms")
+
+sea e = t.mktime_utc(1970, 1, 1, 0, 0, 0)
+print("epoch utc base: " + string(e))</code></pre>
             </div>
         </main>
 

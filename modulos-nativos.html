@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="itsuki_logo.png" type="image/png" />
+        <title>Itsuki Docs | Modulos Nativos C</title>
+        <meta
+            name="description"
+            content="Guia para crear modulos nativos en C para Itsuki en Windows y Linux."
+        />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="bg-shape bg-shape-a" aria-hidden="true"></div>
+        <div class="bg-shape bg-shape-b" aria-hidden="true"></div>
+
+        <header class="site-header">
+            <div class="container nav-wrap">
+                <a class="brand" href="index.html"
+                    ><img
+                        class="brand-logo"
+                        src="itsuki_logo.png"
+                        alt="Logo de Itsuki"
+                    /><span class="brand-text">Itsuki Docs</span></a
+                >
+                <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">
+                    Menu
+                </button>
+                <nav class="top-nav" id="topNav">
+                    <a href="index.html">Inicio</a>
+                    <a href="instalacion-cli.html">Instalacion y CLI</a>
+                    <a href="sintaxis.html">Sintaxis</a>
+                    <a href="builtins.html">Builtins</a>
+                    <a href="bibliotecas.html">Bibliotecas</a>
+                    <a href="modulos-nativos.html">Modulos C</a>
+                    <a href="arquitectura.html">Arquitectura</a>
+                    <a href="ejemplos.html">Ejemplos</a>
+                    <a href="skills.html">Skills</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container doc reveal">
+            <h1>Modulos Nativos C</h1>
+            <p>
+                Itsuki v5.0 permite cargar modulos nativos compilados como
+                librerias compartidas para alto rendimiento.
+            </p>
+
+            <h2>Concepto</h2>
+            <ul>
+                <li>Escribes el modulo en C.</li>
+                <li>
+                    Exportas una funcion obligatoria:
+                    <code>itsuki_module_init</code>.
+                </li>
+                <li>Compilas a <code>.dll</code> (Windows) o <code>.so</code> (Linux).</li>
+                <li>
+                    Importas en Itsuki con
+                    <code>importar "modules/mi_modulo" como mm</code>.
+                </li>
+            </ul>
+
+            <h2>Plantilla minima</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>#include "itsuki_ext.h"
+
+static const ItsukiApi* g_api = NULL;
+
+static Result fn_doble(Result args[], int n_args) {
+    if (n_args &lt; 1 || args[0].tipo != TIPO_NUMERO) {
+        g_api-&gt;raise(ERROR_ARGUMENTO, "doble(x) requiere numero");
+        return g_api-&gt;make_null();
+    }
+    return g_api-&gt;make_number(args[0].n * 2.0);
+}
+
+ITSUKI_EXT_EXPORT int ITSUKI_EXT_CALL itsuki_module_init(const ItsukiApi* api, ItsukiModule* module) {
+    if (!api || !module) return 0;
+    if (api-&gt;version != ITSUKI_EXT_API_VERSION) return 0;
+    g_api = api;
+
+    if (!api-&gt;export_const(module, "VERSION", api-&gt;make_string("1.0.0"))) return 0;
+    if (!api-&gt;export_native(module, "doble", fn_doble)) return 0;
+    return 1;
+}</code></pre>
+            </div>
+
+            <h2>Compilar en Windows</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>gcc -shared -O3 -Wall -I./src/headers modules/mi_modulo.c -o modules/mi_modulo.dll -lm</code></pre>
+            </div>
+
+            <h2>Compilar en Linux</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>gcc -shared -fPIC -O3 -Wall -I./src/headers modules/mi_modulo.c -o modules/mi_modulo.so -lm</code></pre>
+            </div>
+
+            <h2>Compilar con Makefile de modules/</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>cd modules
+make        # compila todos los modulos .c
+make math   # compila solo math.c
+make clean</code></pre>
+            </div>
+
+            <h2>Uso desde Itsuki</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>importar "modules/math" como math
+
+print(math.PI)
+print(math.factorial(5))
+print(math.mcd(84, 30))</code></pre>
+            </div>
+
+            <h2>Errores comunes</h2>
+            <ul>
+                <li>
+                    <code>No se pudo abrir el modulo</code>: revisa nombre,
+                    ruta y que el binario exista.
+                </li>
+                <li>
+                    Falta <code>itsuki_module_init</code>: la libreria no
+                    exporta la entrada esperada.
+                </li>
+                <li>
+                    El ejecutable de Itsuki no carga nativos: recompila el core
+                    con el runtime de extensiones habilitado.
+                </li>
+            </ul>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container"><p>Itsuki Docs</p></div>
+        </footer>
+        <script src="script.js"></script>
+    </body>
+</html>

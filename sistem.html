@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="itsuki_logo.png" type="image/png" />
+        <title>Itsuki Docs | Biblioteca sistem</title>
+        <meta
+            name="description"
+            content="Documentacion del modulo sistem de Itsuki."
+        />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="bg-shape bg-shape-b" aria-hidden="true"></div>
+        <header class="site-header">
+            <div class="container nav-wrap">
+                <a class="brand" href="index.html"
+                    ><img
+                        class="brand-logo"
+                        src="itsuki_logo.png"
+                        alt="Logo de Itsuki"
+                    /><span class="brand-text">Itsuki Docs</span></a
+                >
+                <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">
+                    Menu
+                </button>
+                <nav class="top-nav" id="topNav">
+                    <a href="index.html">Inicio</a>
+                    <a href="instalacion-cli.html">Instalacion y CLI</a>
+                    <a href="sintaxis.html">Sintaxis</a>
+                    <a href="builtins.html">Builtins</a>
+                    <a href="bibliotecas.html">Bibliotecas</a>
+                    <a href="modulos-nativos.html">Modulos C</a>
+                    <a href="arquitectura.html">Arquitectura</a>
+                    <a href="ejemplos.html">Ejemplos</a>
+                    <a href="skills.html">Skills</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container doc reveal">
+            <h1>Biblioteca sistem</h1>
+            <p>
+                Modulo nativo para interactuar con el sistema operativo, estilo
+                OS de Python.
+            </p>
+
+            <h2>Importacion</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>importar "modules/sistem" como os</code></pre>
+            </div>
+
+            <h2>Constantes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Constante</th>
+                        <th>Descripcion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>os.SEP</code></td>
+                        <td>Separador de directorios del sistema.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.PATHSEP</code></td>
+                        <td>Separador de variables tipo PATH.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.EXE_EXT</code></td>
+                        <td>
+                            Extension de ejecutable (ej. <code>.exe</code> en
+                            Windows).
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Funciones</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Funcion</th>
+                        <th>Firma</th>
+                        <th>Descripcion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>os.version</code></td>
+                        <td><code>()</code></td>
+                        <td>Version del modulo.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.name</code></td>
+                        <td><code>()</code></td>
+                        <td>Nombre de plataforma: windows, linux o darwin.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.pid</code></td>
+                        <td><code>()</code></td>
+                        <td>PID del proceso actual.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.run</code></td>
+                        <td><code>(cmd)</code></td>
+                        <td>Ejecuta comando del sistema y retorna codigo.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.spawn</code></td>
+                        <td><code>(cmd)</code></td>
+                        <td>
+                            Lanza proceso en segundo plano y retorna ID interno.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>os.wait</code></td>
+                        <td><code>(proc_id, [timeout_ms])</code></td>
+                        <td>
+                            Espera un proceso lanzado con <code>spawn</code>.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>os.try_wait</code></td>
+                        <td><code>(proc_id)</code></td>
+                        <td>
+                            Consulta no bloqueante del estado de un proceso.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>os.kill</code></td>
+                        <td><code>(proc_id)</code></td>
+                        <td>
+                            Intenta terminar un proceso lanzado con
+                            <code>spawn</code>.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>os.process_destroy</code></td>
+                        <td><code>(proc_id)</code></td>
+                        <td>
+                            Libera recursos internos del proceso gestionado.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>os.cwd</code></td>
+                        <td><code>()</code></td>
+                        <td>Directorio actual.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.chdir</code></td>
+                        <td><code>(path)</code></td>
+                        <td>Cambia directorio actual.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.listdir</code></td>
+                        <td><code>([path])</code></td>
+                        <td>Lista nombres en un directorio.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.scandir</code></td>
+                        <td><code>([path])</code></td>
+                        <td>
+                            Lista entradas con metadatos basicos (nombre/tipo).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>os.walk</code></td>
+                        <td><code>(path)</code></td>
+                        <td>
+                            Recorre arbol de carpetas y retorna una lista de
+                            nodos.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>os.mkdir</code></td>
+                        <td><code>(path)</code></td>
+                        <td>Crea un directorio.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.makedirs</code></td>
+                        <td><code>(path)</code></td>
+                        <td>Crea arbol de directorios.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.rmdir</code></td>
+                        <td><code>(path)</code></td>
+                        <td>Elimina directorio vacio.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.remove</code></td>
+                        <td><code>(path)</code></td>
+                        <td>Elimina archivo.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.rename</code></td>
+                        <td><code>(src, dst)</code></td>
+                        <td>Renombra/mueve ruta.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.copy</code></td>
+                        <td><code>(src, dst)</code></td>
+                        <td>
+                            Copia archivo de <code>src</code> a
+                            <code>dst</code>.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>os.move</code></td>
+                        <td><code>(src, dst)</code></td>
+                        <td>
+                            Mueve archivo/directorio (alias semantico de
+                            rename).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>os.exists</code></td>
+                        <td><code>(path)</code></td>
+                        <td>True si existe.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.is_file</code></td>
+                        <td><code>(path)</code></td>
+                        <td>True si es archivo.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.is_dir</code></td>
+                        <td><code>(path)</code></td>
+                        <td>True si es directorio.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.stat_size</code></td>
+                        <td><code>(path)</code></td>
+                        <td>Tamano de archivo en bytes.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.chmod</code></td>
+                        <td><code>(path, mode)</code></td>
+                        <td>Cambia permisos del path.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.chown</code></td>
+                        <td><code>(path, uid, gid)</code></td>
+                        <td>Cambia owner/grupo (solo POSIX).</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.utime</code></td>
+                        <td><code>(path, atime, mtime)</code></td>
+                        <td>Actualiza timestamps de acceso/modificacion.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.symlink</code></td>
+                        <td><code>(src, dst)</code></td>
+                        <td>Crea enlace simbolico.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.readlink</code></td>
+                        <td><code>(path)</code></td>
+                        <td>Lee destino de enlace simbolico (solo POSIX).</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.access</code></td>
+                        <td><code>(path, [mode])</code></td>
+                        <td>Verifica acceso a una ruta.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.getenv</code></td>
+                        <td><code>(key, [default])</code></td>
+                        <td>Lee variable de entorno.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.setenv</code></td>
+                        <td><code>(key, value, [overwrite])</code></td>
+                        <td>Setea variable de entorno.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.unsetenv</code></td>
+                        <td><code>(key)</code></td>
+                        <td>Elimina variable de entorno.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.path_join</code></td>
+                        <td><code>(part1, part2, ...)</code></td>
+                        <td>Une segmentos de ruta.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.basename</code></td>
+                        <td><code>(path)</code></td>
+                        <td>Nombre base de una ruta.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.dirname</code></td>
+                        <td><code>(path)</code></td>
+                        <td>Directorio padre de una ruta.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.splitext</code></td>
+                        <td><code>(path)</code></td>
+                        <td>Retorna <code>[root, ext]</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.normpath</code></td>
+                        <td><code>(path)</code></td>
+                        <td>
+                            Normaliza separadores y segmentos
+                            <code>.</code>/<code>..</code>.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>os.abspath</code></td>
+                        <td><code>(path)</code></td>
+                        <td>Ruta absoluta.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.temp_dir</code></td>
+                        <td><code>()</code></td>
+                        <td>Directorio temporal del sistema.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.home_dir</code></td>
+                        <td><code>()</code></td>
+                        <td>Directorio home del usuario.</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.getuid</code></td>
+                        <td><code>()</code></td>
+                        <td>UID del proceso (solo POSIX).</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.getgid</code></td>
+                        <td><code>()</code></td>
+                        <td>GID del proceso (solo POSIX).</td>
+                    </tr>
+                    <tr>
+                        <td><code>os.umask</code></td>
+                        <td><code>(mask)</code></td>
+                        <td>
+                            Cambia mascara de permisos y retorna la anterior
+                            (solo POSIX).
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Compatibilidad</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>API</th>
+                        <th>Windows</th>
+                        <th>Linux/macOS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <code>chown</code>, <code>readlink</code>,
+                            <code>getuid</code>, <code>getgid</code>,
+                            <code>umask</code>
+                        </td>
+                        <td>No disponible</td>
+                        <td>Disponible</td>
+                    </tr>
+                    <tr>
+                        <td><code>symlink</code></td>
+                        <td>Disponible segun permisos/politica del sistema</td>
+                        <td>Disponible</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Ejemplo rapido</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>importar "modules/sistem" como os
+
+print(os.name())
+print(os.cwd())
+print(os.path_join("modules", "sistem" + os.EXE_EXT))
+print(os.normpath("./a/../b//c.txt"))
+
+os.setenv("ITSUKI_X", "123")
+print(os.getenv("ITSUKI_X", "none"))
+os.unsetenv("ITSUKI_X")
+
+sea files = os.listdir("modules")
+print("archivos: " + string(largo(files)))
+
+sea p = os.spawn("echo hola")
+sea st = os.wait(p, 5000)
+print(st)</code></pre>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container"><p>Itsuki Docs</p></div>
+        </footer>
+        <script src="script.js"></script>
+    </body>
+</html>

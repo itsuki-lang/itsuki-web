@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="es">
     <head>
         <meta charset="utf-8" />
@@ -31,6 +31,7 @@
                     <a href="sintaxis.html">Sintaxis</a>
                     <a href="builtins.html">Builtins</a>
                     <a href="bibliotecas.html">Bibliotecas</a>
+                    <a href="modulos-nativos.html">Modulos C</a>
                     <a href="arquitectura.html">Arquitectura</a>
                     <a href="ejemplos.html">Ejemplos</a>
                     <a href="skills.html">Skills</a>
@@ -70,10 +71,16 @@ print(mate.sumar(10, 20))</code></pre>
 
             <h2>3) Recomendaciones</h2>
             <ul>
-                <li>Exporta solo API publica; deja lo interno sin <code>exportar</code>.</li>
+                <li>
+                    Exporta solo API publica; deja lo interno sin
+                    <code>exportar</code>.
+                </li>
                 <li>Usa nombres claros para funciones y constantes.</li>
                 <li>Evita ejecutar logica pesada al cargar el modulo.</li>
-                <li>Si el modulo crece, usa un <code>init.suki</code> para reexportar.</li>
+                <li>
+                    Si el modulo crece, usa un <code>init.suki</code> para
+                    reexportar.
+                </li>
             </ul>
 
             <h2>Estructura sugerida</h2>
@@ -88,9 +95,31 @@ print(mate.sumar(10, 20))</code></pre>
 
             <h2>Bonus: modulo nativo C</h2>
             <p>
-                Si necesitas rendimiento bajo nivel, crea funciones en C y
-                registralas en <code>src/builtins.c</code> para exponerlas al
-                lenguaje.
+                Para alto rendimiento, crea un modulo en C compilado como
+                libreria compartida y cargalo con
+                <code>importar "modules/mi_modulo"</code>.
+            </p>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code># Windows (.dll)
+gcc -shared -O3 -Wall -I./src/headers modules/mi_modulo.c -o modules/mi_modulo.dll -lm
+
+# Linux (.so)
+gcc -shared -fPIC -O3 -Wall -I./src/headers modules/mi_modulo.c -o modules/mi_modulo.so -lm</code></pre>
+            </div>
+            <p>
+                Tambien puedes usar el Makefile de <code>modules/</code> para
+                compilar rapido:
+            </p>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>cd modules
+make        # todos los modulos C
+make math   # solo math.c</code></pre>
+            </div>
+            <p>
+                Ver guia completa:
+                <a href="modulos-nativos.html">Modulos Nativos C</a>.
             </p>
         </main>
 
@@ -100,4 +129,3 @@ print(mate.sumar(10, 20))</code></pre>
         <script src="script.js"></script>
     </body>
 </html>
-

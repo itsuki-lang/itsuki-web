@@ -1,0 +1,166 @@
+﻿<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="itsuki_logo.png" type="image/png" />
+        <title>Itsuki Docs | Bibliotecas</title>
+        <meta name="description" content="Catalogo de bibliotecas de Itsuki." />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="bg-shape bg-shape-a" aria-hidden="true"></div>
+        <header class="site-header">
+            <div class="container nav-wrap">
+                <a class="brand" href="index.html"
+                    ><img
+                        class="brand-logo"
+                        src="itsuki_logo.png"
+                        alt="Logo de Itsuki"
+                    /><span class="brand-text">Itsuki Docs</span></a
+                >
+                <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">
+                    Menu
+                </button>
+                <nav class="top-nav" id="topNav">
+                    <a href="index.html">Inicio</a>
+                    <a href="instalacion-cli.html">Instalacion y CLI</a>
+                    <a href="sintaxis.html">Sintaxis</a>
+                    <a href="builtins.html">Builtins</a>
+                    <a href="bibliotecas.html">Bibliotecas</a>
+                    <a href="modulos-nativos.html">Modulos C</a>
+                    <a href="arquitectura.html">Arquitectura</a>
+                    <a href="ejemplos.html">Ejemplos</a>
+                    <a href="skills.html">Skills</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container doc reveal">
+            <h1>Bibliotecas</h1>
+            <p>Busca una biblioteca y abre su documentaciÃ³n.</p>
+
+            <label for="librarySearch"
+                ><strong>Buscar biblioteca</strong></label
+            >
+            <input
+                id="librarySearch"
+                class="search"
+                type="search"
+                placeholder="Ej: socket"
+            />
+
+            <section id="libraryList" class="library-catalog">
+                <article
+                    class="library-item library-card-row"
+                    data-library-name="socket red tcp udp"
+                >
+                    <img
+                        class="library-thumb"
+                        src="itsuki_logo.png"
+                        alt="Biblioteca socket"
+                    />
+                    <div class="library-content">
+                        <h2>socket</h2>
+                        <p>
+                            Biblioteca nativa de red para conexiones TCP/UDP en
+                            Itsuki.
+                        </p>
+                        <a class="btn btn-purple" href="socket.html">Revisar</a>
+                    </div>
+                </article>
+                <article
+                    class="library-item library-card-row"
+                    data-library-name="time tiempo reloj fecha sleep ms"
+                >
+                    <img
+                        class="library-thumb"
+                        src="itsuki_logo.png"
+                        alt="Biblioteca time"
+                    />
+                    <div class="library-content">
+                        <h2>time</h2>
+                        <p>
+                            Utilidades de tiempo: reloj, monotonic, sleep y
+                            formateo UTC/local.
+                        </p>
+                        <a class="btn btn-purple" href="time.html">Revisar</a>
+                    </div>
+                </article>
+                <article
+                    class="library-item library-card-row"
+                    data-library-name="threads hilos concurrencia mutex semaforo atomics"
+                >
+                    <img
+                        class="library-thumb"
+                        src="itsuki_logo.png"
+                        alt="Biblioteca threads"
+                    />
+                    <div class="library-content">
+                        <h2>threads</h2>
+                        <p>
+                            Concurrencia nativa: creacion de hilos, join,
+                            sincronizacion y tareas en segundo plano.
+                        </p>
+                        <a class="btn btn-purple" href="threads.html"
+                            >Revisar</a
+                        >
+                    </div>
+                </article>
+                <article
+                    class="library-item library-card-row"
+                    data-library-name="sistem os sistema archivos directorios entorno"
+                >
+                    <img
+                        class="library-thumb"
+                        src="itsuki_logo.png"
+                        alt="Biblioteca sistem"
+                    />
+                    <div class="library-content">
+                        <h2>sistem</h2>
+                        <p>
+                            Biblioteca nativa tipo OS para rutas, archivos,
+                            directorios, entorno y ejecucion de comandos.
+                        </p>
+                        <a class="btn btn-purple" href="sistem.html">Revisar</a>
+                    </div>
+                </article>
+                <article
+                    class="library-item library-card-row"
+                    data-library-name="math matematicas estadistica c nativo"
+                >
+                    <img
+                        class="library-thumb"
+                        src="itsuki_logo.png"
+                        alt="Biblioteca math"
+                    />
+                    <div class="library-content">
+                        <h2>math</h2>
+                        <p>
+                            Biblioteca nativa de matematicas en C con funciones
+                            de calculo, estadistica y utilidades numericas.
+                        </p>
+                        <a class="btn btn-purple" href="math.html">Revisar</a>
+                    </div>
+                </article>
+            </section>
+
+            <section class="panel">
+                <h2>Aprender a crear modulos</h2>
+                <p>
+                    Guia paso a paso para crear y publicar tu propio modulo en
+                    Itsuki.
+                </p>
+                <a class="btn btn-purple" href="crear-modulo.html">Revisar</a>
+                <a class="btn btn-ghost" href="modulos-nativos.html"
+                    >Modulos nativos C</a
+                >
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container"><p>Itsuki Docs</p></div>
+        </footer>
+        <script src="script.js"></script>
+    </body>
+</html>

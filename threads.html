@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="itsuki_logo.png" type="image/png" />
+        <title>Itsuki Docs | Biblioteca threads</title>
+        <meta
+            name="description"
+            content="Documentacion del modulo threads de Itsuki."
+        />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="bg-shape bg-shape-a" aria-hidden="true"></div>
+        <header class="site-header">
+            <div class="container nav-wrap">
+                <a class="brand" href="index.html"
+                    ><img
+                        class="brand-logo"
+                        src="itsuki_logo.png"
+                        alt="Logo de Itsuki"
+                    /><span class="brand-text">Itsuki Docs</span></a
+                >
+                <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">
+                    Menu
+                </button>
+                <nav class="top-nav" id="topNav">
+                    <a href="index.html">Inicio</a>
+                    <a href="instalacion-cli.html">Instalacion y CLI</a>
+                    <a href="sintaxis.html">Sintaxis</a>
+                    <a href="builtins.html">Builtins</a>
+                    <a href="bibliotecas.html">Bibliotecas</a>
+                    <a href="modulos-nativos.html">Modulos C</a>
+                    <a href="arquitectura.html">Arquitectura</a>
+                    <a href="ejemplos.html">Ejemplos</a>
+                    <a href="skills.html">Skills</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container doc reveal">
+            <h1>Biblioteca threads</h1>
+            <p>
+                Modulo nativo en C implementado en
+                <code>modules/threads.c</code>. Expone creacion de hilos,
+                sincronizacion y utilidades de concurrencia.
+            </p>
+
+            <h2>Importacion</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>importar "modules/threads" como threads</code></pre>
+            </div>
+
+            <h2>Constantes de estado</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Constante</th>
+                        <th>Descripcion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>threads.STATUS_NEW</code></td>
+                        <td>Thread creado, aun no corriendo.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.STATUS_RUNNING</code></td>
+                        <td>Thread en ejecucion.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.STATUS_DONE</code></td>
+                        <td>Thread finalizado correctamente.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.STATUS_FAILED</code></td>
+                        <td>Thread termino con error.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.STATUS_CANCELLED</code></td>
+                        <td>Thread cancelado.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>API base y tareas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Funcion</th>
+                        <th>Firma</th>
+                        <th>Descripcion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>threads.version</code></td>
+                        <td><code>()</code></td>
+                        <td>Version del modulo threads.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.hardware_threads</code></td>
+                        <td><code>()</code></td>
+                        <td>Cantidad de hilos de hardware visibles.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.now_ms</code></td>
+                        <td><code>()</code></td>
+                        <td>Tiempo actual en ms.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.sleep_ms</code></td>
+                        <td><code>(ms)</code></td>
+                        <td>Pausa en milisegundos.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.yield_now</code></td>
+                        <td><code>()</code></td>
+                        <td>Cede CPU al scheduler.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.spawn_sleep</code></td>
+                        <td><code>(ms)</code></td>
+                        <td>Crea thread que duerme.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.spawn_system</code></td>
+                        <td><code>(cmd)</code></td>
+                        <td>Ejecuta comando del sistema en thread.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.spawn_process</code></td>
+                        <td><code>(cmd)</code></td>
+                        <td>Alias de spawn_system.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.spawn_itsuki</code></td>
+                        <td><code>(script, [args], [exe_path])</code></td>
+                        <td>Ejecuta otro script Itsuki en segundo plano.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.spawn_sum</code></td>
+                        <td><code>(inicio, fin, [paso])</code></td>
+                        <td>Suma rango en un thread.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.spawn_fibonacci</code></td>
+                        <td><code>(n)</code></td>
+                        <td>Calcula fibonacci en un thread.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.spawn_udp_sender</code></td>
+                        <td>
+                            <code
+                                >([socket], host, port, payload, count,
+                                [delay_ms])</code
+                            >
+                        </td>
+                        <td>Envia UDP en background.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Ciclo de vida de threads</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Funcion</th>
+                        <th>Firma</th>
+                        <th>Descripcion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>threads.join</code></td>
+                        <td><code>(id)</code></td>
+                        <td>Espera fin y retorna mapa de resultado.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.join_timeout</code></td>
+                        <td><code>(id, timeout_ms)</code></td>
+                        <td>
+                            Espera con timeout; retorna mapa con
+                            <code>done</code>.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.try_join</code></td>
+                        <td><code>(id)</code></td>
+                        <td>Join no bloqueante.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.detach</code></td>
+                        <td><code>(id)</code></td>
+                        <td>Desacopla thread para no hacer join.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.cancel</code></td>
+                        <td><code>(id)</code></td>
+                        <td>Solicita cancelacion.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.status</code></td>
+                        <td><code>(id)</code></td>
+                        <td>Retorna estado numerico.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.is_running</code></td>
+                        <td><code>(id)</code></td>
+                        <td>Retorna true si sigue corriendo.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.count_threads</code></td>
+                        <td><code>([running_only])</code></td>
+                        <td>Cuenta threads registrados.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.list_threads</code></td>
+                        <td><code>([running_only])</code></td>
+                        <td>Lista info de threads en array.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.destroy</code></td>
+                        <td><code>(id)</code></td>
+                        <td>Libera registro de thread finalizado.</td>
+                    </tr>
+                    <tr>
+                        <td><code>threads.cleanup</code></td>
+                        <td><code>()</code></td>
+                        <td>Limpia entradas detached finalizadas.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Sincronizacion</h2>
+            <p>El modulo tambien exporta APIs para mutex, rwlock, condvar, semaforos, barreras y atomics:</p>
+            <ul>
+                <li><code>mutex_new / mutex_lock / mutex_try_lock / mutex_unlock / mutex_destroy</code></li>
+                <li><code>rwlock_new / rwlock_rdlock / rwlock_wrlock / rwlock_try_rdlock / rwlock_try_wrlock / rwlock_rdunlock / rwlock_wrunlock / rwlock_destroy</code></li>
+                <li><code>cond_new / cond_wait / cond_signal / cond_broadcast / cond_destroy</code></li>
+                <li><code>sem_new / sem_wait / sem_try_wait / sem_post / sem_value / sem_destroy</code></li>
+                <li><code>barrier_new / barrier_wait / barrier_destroy</code></li>
+                <li><code>atomic_new / atomic_get / atomic_set / atomic_inc / atomic_dec / atomic_add / atomic_sub / atomic_cas / atomic_destroy</code></li>
+            </ul>
+
+            <h2>Ejemplo minimo</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>importar "modules/threads" como threads
+
+sea tid = threads.spawn_sleep(200)
+sea info = threads.join(tid)
+
+print("thread=" + string(info["id"]))
+print("status=" + string(info["status"]))
+print("task=" + string(info["task"]))</code></pre>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container"><p>Itsuki Docs</p></div>
+        </footer>
+        <script src="script.js"></script>
+    </body>
+</html>

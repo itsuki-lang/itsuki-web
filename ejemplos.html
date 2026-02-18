@@ -1,0 +1,230 @@
+﻿<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="itsuki_logo.png" type="image/png" />
+        <title>Itsuki Docs | Ejemplos</title>
+        <meta
+            name="description"
+            content="Ejemplos practicos del lenguaje Itsuki."
+        />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="bg-shape bg-shape-a" aria-hidden="true"></div>
+        <header class="site-header">
+            <div class="container nav-wrap">
+                <a class="brand" href="index.html"
+                    ><img
+                        class="brand-logo"
+                        src="itsuki_logo.png"
+                        alt="Logo de Itsuki"
+                    /><span class="brand-text">Itsuki Docs</span></a
+                >
+                <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">
+                    Menu
+                </button>
+                <nav class="top-nav" id="topNav">
+                    <a href="index.html">Inicio</a>
+                    <a href="instalacion-cli.html">Instalacion y CLI</a>
+                    <a href="sintaxis.html">Sintaxis</a>
+                    <a href="builtins.html">Builtins</a>
+                    <a href="bibliotecas.html">Bibliotecas</a>
+                    <a href="modulos-nativos.html">Modulos C</a>
+                    <a href="arquitectura.html">Arquitectura</a>
+                    <a href="ejemplos.html">Ejemplos</a>
+                    <a href="skills.html">Skills</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container doc reveal">
+            <h1>Ejemplos practicos</h1>
+            <p>Snippets listos para copiar y adaptar en proyectos reales.</p>
+
+            <h2>0) Variables: var / let / const</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>var counter = 0
+counter = counter + 1
+
+let user = "maria"
+# user = "ana"   # error
+
+const MAX = 100
+# const x = input() # error (no constante)</code></pre>
+            </div>
+
+            <h2>1) Arrays + mapear + filtrar + reducir</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>sea nums = [1,2,3,4,5,6]
+
+funcion es_par(x) { retornar x % 2 == 0 }
+funcion doble(x) { retornar x * 2 }
+funcion acum(a, b) { retornar a + b }
+
+sea pares = filtrar(nums, es_par)
+sea dobles = mapear(pares, doble)
+sea total = reducir(dobles, acum, 0)
+print(total)</code></pre>
+            </div>
+
+            <h2>2) Clase con herencia</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>clase Animal {
+  funcion hablar() { print("...") }
+}
+
+clase Perro hereda Animal {
+  funcion hablar() { print("guau") }
+}
+
+sea p = nueva Perro()
+p.hablar()</code></pre>
+            </div>
+
+            <h2>3) Manejo de errores</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>intentar {
+  sea txt = leer_archivo("no_existe.txt")
+  print(txt)
+} capturar(err) {
+  print("error: " + string(err))
+} finalmente {
+  print("continuando")
+}</code></pre>
+            </div>
+
+            <h2>4) Modulo simple</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code># modules/mate/init.suki
+exportar funcion sumar(a, b) { retornar a + b }
+
+# app.suki
+importar desde "mate" importar sumar
+print(sumar(10, 20))</code></pre>
+            </div>
+
+            <h2>5) c_extern basico</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>c_extern funcion system(cmd: string): int
+sea code = system("echo hola")
+print(code)</code></pre>
+            </div>
+
+            <h2>6) Diccionarios / mapas</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>sea usuario = {
+  "id": 7,
+  "nombre": "Mary",
+  "roles": ["admin", "editor"]
+}
+
+print(usuario["nombre"])</code></pre>
+            </div>
+
+            <h2>7) Conversores + validacion de tipo</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>sea raw = "128"
+sea n = int(raw)
+sea ok = es_numero(n)
+
+si (ok) {
+  print("valor: " + string(n))
+}</code></pre>
+            </div>
+
+            <h2>8) Mini pipeline de strings</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>sea texto = "itsuki,es,potente"
+sea partes = split(texto, ",")
+agregar(partes, "rapido")
+sea salida = join(partes, " | ")
+print(mayusculas(salida))</code></pre>
+            </div>
+
+            <h2>9) Enums con datos asociados</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>enum Estado {
+  Cargando,
+  Exito(data),
+  Error(msg)
+}
+
+sea r = Estado.Error("timeout")
+print(string(r))</code></pre>
+            </div>
+
+            <h2>10) Escritura y lectura de archivo</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>escribir_archivo("nota.txt", "hola itsuki")
+si (existe_archivo("nota.txt")) {
+  sea txt = leer_archivo("nota.txt")
+  print(txt)
+}</code></pre>
+            </div>
+
+            <h2>11) Socket TCP cliente rapido</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>importar "modules/socket" como net
+
+sea c = net.socket(net.AF_INET, net.SOCK_STREAM)
+net.connect(c, "127.0.0.1", 8080)
+net.send(c, "ping")
+sea resp = net.recv(c, 1024)
+print(resp)
+net.close(c)</code></pre>
+            </div>
+
+            <h2>12) Uso de cli_args</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>sea args = cli_args()
+print("cantidad: " + string(largo(args)))
+cada(args, lambda(x) { print("arg: " + string(x)) })</code></pre>
+            </div>
+
+            <h2>13) Decoradores encadenados</h2>
+            <div class="code-wrap">
+                <button class="copy-btn" type="button">Copiar</button>
+                <pre><code>funcion log_llamada(func) {
+  print("Decorador: Funcion '" + string(func) + "' fue decorada")
+  retornar func
+}
+
+funcion medir_tiempo(func) {
+  print("Decorador: Midiendo tiempo de ejecucion")
+  retornar func
+}
+
+@log_llamada
+@medir_tiempo
+funcion calcular(a, b) {
+  retornar a + b
+}
+
+sea resultado = calcular(10, 20)
+print("Resultado: " + string(resultado))</code></pre>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container"><p>Itsuki Docs</p></div>
+        </footer>
+        <script src="script.js"></script>
+    </body>
+</html>
+
+
